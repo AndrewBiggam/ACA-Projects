@@ -1,28 +1,32 @@
 class highSchool
 {
-	String output;
+	String output = "";
 	int counter = 1;
 	
 	public String runLength(String a) 
 	{
 		for (int i = 0; i < a.length(); i++)
 		{
-			if(i + 1 == a.length())
+			String num = Integer.toString(counter);
+			char letter = a.charAt(i);
+			
+			if(i + 1 == a.length())			
+			{
+				output += num +"" + letter;
 				break;
+			}
 			
-				if(a.charAt(i)==a.charAt(i+1))
-				{
-						counter += counter;
-				}
+			if(a.charAt(i)==a.charAt(i+1))
+			{
+					counter++;
+			}
 			
-			
-				if(a.charAt(i)!=a.charAt(i+1))
-				{
-					String num = Integer.toString(counter);
-					char letter = a.charAt(i);
-					output += num +"" + letter;
-				}
+			if(a.charAt(i)!=a.charAt(i+1))
+			{
+				output += num +"" + letter;
 				counter = 1;
+			}
+				
 		}
 		return output;
 	}
