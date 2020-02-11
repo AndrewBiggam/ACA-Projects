@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.text.DecimalFormat;
 import java.util.*;
+import java.awt.event.*;
 class robertD{
 	
 	Moneys[] pocketChange;
@@ -37,52 +38,25 @@ class robertD{
 	}
 }
 
-class dinero extends JFrame{
+class dinero extends JFrame implements ActionListener{
 	
-	JPanel coinWindow = new JPanel();
+	JPanel coinWindow; 
+
+	JTextArea txtArea;
 	
-	JTextField coinText = new JTextField(38);
-	JTextField sumText = new JTextField("Default Text", 38);
+	JTextArea txtArea2;
 	
-	JTextArea txtArea = new JTextArea( 5, 37 );
+	JScrollPane pane; 
 	
-	JScrollPane pane = new JScrollPane( txtArea );
+	JButton reRoll;
 	
-	public dinero()
+	public void Roll()
 	{
-		super("My Pocket");
-		setSize(500, 200);
-		setDefaultCloseOperation( EXIT_ON_CLOSE );
-		add(coinWindow);
-		
-		txtArea.setLineWrap(true);
-		txtArea.setWrapStyleWord(true) ;
-		
-		pane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		
-		coinWindow.add(coinText);
-		coinWindow.add(sumText);
-		coinWindow.add(pane);
-		
-		setVisible( true );
-	}
-	
-	public static robertD.Moneys randomcoin()
-	{
-		Random r = new Random();
-		int newcoin = r.nextInt(6);
-		return robertD.Moneys.values()[newcoin];
-	}
-	
-	
-	public static void main(String... v){
 		robertD Duckets = new robertD();
 		
 		Duckets.pocketChange = new robertD.Moneys[20];
 	
 		DecimalFormat twoPlaces = new DecimalFormat("0.00");
-		
-		dinero gui = new dinero();
 	
 		int sum = 0;
 		
@@ -96,12 +70,71 @@ class dinero extends JFrame{
 		for(robertD.Moneys coin: Duckets.pocketChange){ 
 			int value = Duckets.getValue(coin);
 			
-			System.out.println("$" + twoPlaces.format((double)value/100) + " " + coin);
+			txtArea.append("$" + twoPlaces.format((double)value/100) + " " + coin + "\n");
 			sum += Duckets.getValue(coin);
 		}
-		System.out.println();
-		System.out.println("This is how poor you are: " + "$" + (double)sum/100);
 		
+		txtArea2.append("This is how poor you are: " + "$" + twoPlaces.format((double)sum/100));
+		
+	}
+	
+	public dinero()
+	{
+		super("My Pocket");
+		setSize(400, 400);
+		setDefaultCloseOperation( EXIT_ON_CLOSE );
+
+		JPanel coinWindow = new JPanel();
+		
+		add(coinWindow);
+		
+		txtArea = new JTextArea( 20, 30 );
+		
+		txtArea2 = new JTextArea( 1, 15 );
+		
+		reRoll = new JButton("I demand a recount!");
+		
+		pane = new JScrollPane( txtArea );
+		
+		txtArea.setLineWrap(true);
+		txtArea.setWrapStyleWord(true) ;
+		
+		pane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		
+		coinWindow.add(pane);
+		
+		coinWindow.add(txtArea2);
+		
+		coinWindow.add(reRoll);
+		
+		reRoll.addActionListener(this);
+		
+		setVisible( true );
+	}
+	
+	public void actionPerformed( ActionEvent event )
+	{
+		if( event.getSource() == reRoll)
+		{
+			txtArea.setText("");
+			txtArea2.setText("");
+			Roll();
+			
+		}
+	}
+	public static robertD.Moneys randomcoin()
+	{
+		Random r = new Random();
+		int newcoin = r.nextInt(6);
+		return robertD.Moneys.values()[newcoin];
+	}
+	
+	
+	public static void main(String... v){
+		
+		dinero gui = new dinero();
+		
+		gui.Roll();
 		
 	}
 }
