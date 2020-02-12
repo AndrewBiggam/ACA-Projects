@@ -1,27 +1,29 @@
 class Xamples{
 	
-	public String ShowYours() {
-		
+	
+	
+	public int ShowYours() {
+		return 11;
 	}
 	
-	public String ShowMine() {
-		
+	public int ShowMine() {
+		return 10;
 	}
 	
-	public int ShowYours(String C) {
-		
+	public String ShowYours(String C) {
+		return "pork";
 	}
 	
-	public int ShowMine(String D) {
-		
+	public String ShowMine(String D) {
+		return "beef";
 	}
 	
 	public double ShowYours(int C) {
-		
+		return 123.456;
 	}
 	
 	public double ShowMine(int D) {
-		
+		return 456.789;
 	}
 
 }
@@ -30,21 +32,37 @@ class useIt{
 	Xamples iWill = new Xamples();
 	
 	int saveInt = 0;
-	int SaveString = "testing";
-	int SaveDouble = 42.42;
+	int saveInt2 = 0;
+	String SaveString = "testing";
+	String SaveString2 = "gnitset";
+	double SaveDouble = 42.42;
+	double SaveDouble2 = 24.24;
 	
-	iWill.ShowMine();
+	public String lacedMeth()
+	{
 	
-	iWill.ShowYours();
+		int saveInt = iWill.ShowMine();
+		
+		int saveInt2 = iWill.ShowYours();
+		
+		String SaveString = iWill.ShowMine("poopity scoop");
+		
+		String SaveString2 = iWill.ShowYours("shoop de woop");
+		
+		double SaveDouble = iWill.ShowMine(42);
+		
+		double SaveDouble2 = iWill.ShowYours(24);
+		
+		return /*System.out.println(*/saveInt + saveInt2 + SaveString + SaveString2 + SaveDouble + SaveDouble2 /*)*/;
+		
+	}
+	public static void main(String args[])
+	{
+		
+		useIt whatisthis = new useIt();
+		
+		System.out.println(whatisthis.lacedMeth());
+	}
 	
-	iWill.ShowMine("i'm telling mom");
-	
-	iWill.ShowYours("ok");
-	
-	iWill.ShowMine(42);
-	
-	iWill.ShowYours(24);
-	
-	System.out.println();
 
 }
